@@ -3,9 +3,6 @@
 #perform the operation on the two numbers
 #out the result
 
-=begin answer Kernal.gets()
-Kernal.puts(answer)
-=end
 Kernel.puts("Welcome to calculator!")
 
 Kernel.puts("Whats the first number?")
