@@ -74,10 +74,6 @@ loop do # main loop
   end
 
   prompt(MESSAGES['operator_prompt'])
-  prompt(MESSAGES['add'])
-  prompt(MESSAGES['subtract'])
-  prompt(MESSAGES['multiply'])
-  prompt(MESSAGES['divide'])
 
   operator = ''
   loop do

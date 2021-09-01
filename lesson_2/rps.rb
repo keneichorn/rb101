@@ -1,17 +1,26 @@
-VALID_CHOICES = ['rock', 'paper', 'scissors']
+VALID_CHOICES = %w(rock paper scissors lizard spock)
 
 def prompt(message)
   Kernel.puts("=> #{message}")
 end
 
+winning_move = { 'rock' => ['lizard', 'scissors'],
+                    'paper' => ['rock', 'spock'],
+                    'scissors' => ['paper', 'lizard'],
+                    'lizard' => ['spock', 'paper'],
+                    'spock' => ['scissors', 'rock']
+                 }
+
+def win?(first, second)
+  first == winning_move.select { |k, v| second = v}
+
+  
+end
+
 def display_result(player, computer)
-  if (player == 'rock' && computer == 'scissors') ||
-     (player == 'paper' && computer == 'rock') ||
-     (player == 'scissors' && computer == 'paper')
+  if win?(player, computer)
     prompt("You won!")
-  elsif (player == 'rock' && computer == 'paper') ||
-        (player == 'paper' && computer == 'scissors') ||
-        (player == 'scissors' && computer == 'rock')
+  elsif win?(computer, player)
     prompt("Computer won!")
   else
     prompt("It's a tie!")
@@ -21,7 +30,7 @@ end
 loop do
   choice = ''
   loop do
-    prompt("Choose one: #{VALID_CHOICES.join(', ')}")
+    prompt("Choose one: #{VALID_CHOICES.join(', ')} You may abbrevate")
     choice = Kernel.gets().chomp()
 
     if VALID_CHOICES.include?(choice)
