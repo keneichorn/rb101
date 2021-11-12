@@ -1,14 +1,10 @@
-def multisum(integer)
-  multiples = []
-
-  (1..integer).each do |num|
-    multiples << num if num % 3 == 0 || num % 5 == 0
-  end
-  multiples.sum
+def running_total(array)
+  sum = 0
+  array.map { |x| sum += x }
 end
 
 
-p multisum(3) == 3
-p multisum(5) == 8
-p multisum(10) == 33
-p multisum(1000) == 234168
+p running_total([2, 5, 13]) == [2, 7, 20]
+p running_total([14, 11, 7, 15, 20]) == [14, 25, 32, 47, 67]
+p running_total([3]) == [3]
+p running_total([]) == []

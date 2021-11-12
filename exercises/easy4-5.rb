@@ -1,24 +1,14 @@
-def leap_year?(year)
-  if year % 4 == 0 && year <= 1751
-    true
-  elsif year % 400 == 0
-    true
-  elsif year % 100 == 0
-    false
-  else year % 4 == 0
+def multisum(integer)
+  multiples = []
+
+  (1..integer).each do |num|
+    multiples << num if num % 3 == 0 || num % 5 == 0
   end
+  multiples.sum
 end
 
-p leap_year?(2016) == true
-p leap_year?(2015) == false
-p leap_year?(2100) == false
-p leap_year?(2400) == true
-p leap_year?(240000) == true
-p leap_year?(240001) == false
-p leap_year?(2000) == true
-p leap_year?(1900) == false
-p leap_year?(1752) == true
-p leap_year?(1700) == true
-p leap_year?(1) == false
-p leap_year?(100) == true
-p leap_year?(400) == true
+
+p multisum(3) == 3
+p multisum(5) == 8
+p multisum(10) == 33
+p multisum(1000) == 234168
