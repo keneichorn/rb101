@@ -1,17 +1,13 @@
-def century(year)
-  century = year / 100 + 1
-  century -= 1 if year % 100 == 0
-  century.to_s + century_suffix(century)
+def joinor(array, delimiter=', ', conjuction='or')
+  case array.size
+  when 0..2 then array.join(" #{conjuction} ")
+  else
+    array[-1] = "#{conjuction} #{array.last}"
+    array.join(delimiter)
+  end
 end
 
-
-
-century(2000) == '20th'
-century(2001) == '21st'
-century(1965) == '20th'
-century(256) == '3rd'
-century(5) == '1st'
-century(10103) == '102nd'
-century(1052) == '11th'
-century(1127) == '12th'
-century(11201) == '113th'
+p joinor([1])                   # => "1 or 2"
+p  joinor([1, 2, 3])                # => "1, 2, or 3"
+p joinor([1, 2, 3], '; ')          # => "1; 2; or 3"
+p joinor([1, 3, 3], ', ', 'and')   # => "1, 2, and 3"

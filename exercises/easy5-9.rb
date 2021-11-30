@@ -1,19 +1,18 @@
-def lengths(pun, size)
-  if size == 0
-    pun * 2
-  else
-   (pun * size) + (pun * 2)
- end
+def crunch(string)
+  counter = 0
+  crunched_string = ''
+
+  until counter == string.size
+    unless string[counter] == string[counter + 1]
+      crunched_string << string[counter]
+    end
+    counter += 1
+  end
+  crunched_string
 end
 
-def print_in_box(string)
-  puts "+#{lengths('-', string.size)}+"
-  puts "|#{lengths(' ', string.size)}|"
-  puts "| #{string} |"
-  puts "|#{lengths(' ', string.size)}|"
-  puts "+#{lengths('-', string.size)}+"
-end
-
-print_in_box('')
-
-
+p crunch('ddaaiillyy ddoouubbllee') #== 'daily double'
+p crunch('4444abcabccba') #== '4abcabcba'
+p crunch('ggggggggggggggg') #== 'g'
+p crunch('a') #== 'a'
+p crunch('') #== ''

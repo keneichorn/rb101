@@ -4,7 +4,7 @@ end
 
 counter = 10
 
-10.times do
+10.times do 
   puts counter
   decrease(counter)
 end

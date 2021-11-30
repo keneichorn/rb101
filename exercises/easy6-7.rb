@@ -1,3 +1,14 @@
+def halvsies(array)
+  middle = 0
+
+  if array.length.odd?
+    middle = array.length / 2
+  else
+    middle = (array.length / 2) - 1
+  end
+
+  [array[0..middle], array[(middle + 1)..-1]]
+end
 
 
 

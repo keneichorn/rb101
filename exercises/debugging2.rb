@@ -1,5 +1,5 @@
 def shout_out_to(name)
-  name.chars.each { |c| c.upcase! }
+  name.upcase!
 
   puts 'HEY ' + name
 end

@@ -1,7 +1,7 @@
 def reverse(array)
   new_array = []
   counter = -1
-  until counter == (-(array.size)) - 1
+  until counter == (-array.size) - 1
     new_array << array[counter]
     counter -= 1
   end

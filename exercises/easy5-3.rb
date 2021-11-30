@@ -1,16 +1,31 @@
-def letter_swap(a, b)
-  a, b = b, a
+def after_midnight(time)
+  minutes = time.split(':')
+  minutes = minutes.map(&:to_i)
+  minutes[0] = minutes[0] * 60
   
+  if minutes.sum == 1440
+    0
+  else
+    minutes.sum
+  end
 end
 
-def swap(string)
-  string_array = string.split(' ').map do |word|
-  letter_swap(word[0], word[-1])
+def before_midnight(time)
+  minutes = time.split(':')
+  minutes = minutes.map(&:to_i)
+  minutes[0] = minutes[0] * 60
+
+  if minutes.sum == 1440 || minutes.sum == 0
+    0
+  else
+    (minutes.sum - 1440).abs
+  end
 end
 
-  string_array.join(' ')
-end
 
-p swap('Oh what a wonderful day it is') #== 'hO thaw a londerfuw yad ti si'
-p swap('Abcde') #== 'ebcdA'
-p swap('a') #== 'a'
+p after_midnight('00:00') #== 0
+p before_midnight('00:00')# == 0
+p after_midnight('12:34') #== 754
+p before_midnight('12:34')# == 686
+p after_midnight('24:00') #== 0
+p before_midnight('24:00')# == 0

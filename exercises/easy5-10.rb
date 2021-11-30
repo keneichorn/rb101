@@ -1,15 +1,18 @@
-def lengths(pun, size=2)
-  pun * size
+def lengths(pun, size)
+  if size == 0
+    pun * 2
+  else
+   (pun * size) + (pun * 2)
+ end
 end
-
 
 def print_in_box(string)
   puts "+#{lengths('-', string.size)}+"
   puts "|#{lengths(' ', string.size)}|"
-  puts "|#{string}|"
+  puts "| #{string} |"
   puts "|#{lengths(' ', string.size)}|"
   puts "+#{lengths('-', string.size)}+"
 end
 
-
+print_in_box('')
 print_in_box('To boldly go where no one has gone before.')

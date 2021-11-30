@@ -1,21 +1,16 @@
-NUMBERS_TO_WORDS = {
-  0 => 'zero', 1 => 'one', 2 => 'two', 3 => 'three',
-  4 => 'four', 5 => 'five', 6 => 'six', 7 => 'seven',
-  8 => 'eight', 9 => 'nine', 10 => 'ten', 11 => 'eleven',
-  12 => 'twelve', 13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen',
-  16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen', 19 => 'nineteen'
-}
+def word_sizes(string)
+  words = string.gsub(/[^a-z ]/i, '').split(' ')
+  word_hash = Hash.new(0)
 
+  words.each do |word|
+    word_hash[word.size] += 1
+  end
 
-
-
-def alphabetic_number_sort(array_of_integers)
-  array_of_integers.sort_by {|int| NUMBERS_TO_WORDS[int]}
+  word_hash.sort.to_h
 end
 
 
-
-p alphabetic_number_sort((0..19).to_a) == [
-  8, 18, 11, 15, 5, 4, 14, 9, 19, 1, 7, 17,
-  6, 16, 10, 13, 3, 12, 2, 0
-]
+p word_sizes('Four score and seven.') == { 3 => 1, 4 => 1, 5 => 2 }
+p word_sizes('Hey diddle diddle, the cat and the fiddle!') == { 3 => 5, 6 => 3 }
+p word_sizes("What's up doc?") == { 5 => 1, 2 => 1, 3 => 1 }
+p word_sizes('') == {}
