@@ -1,12 +1,13 @@
-TARGET_NUM = 21
+require 'pry'
+TARGET_NUM = 150
 DEALER_TARGET = TARGET_NUM - 4
 
 CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, :Jack, :Queen, :King, :Ace]
 
-DECK = { Hearts: CARDS.clone,
-         Diamonds: CARDS.clone,
-         Clubs: CARDS.clone,
-         Spades: CARDS.clone }
+SUITS = [:Hearts,
+        :Diamonds,
+        :Clubs,
+        :Spades]
 
 def add_space
   puts ''
@@ -14,10 +15,6 @@ end
 
 def system_clear
   system 'clear'
-end
-
-def deep_copy(o)
-  Marshal.load(Marshal.dump(o))
 end
 
 def prompt(string)
@@ -44,6 +41,14 @@ def welcome
   add_space
   puts "Push any key to start".center(80)
   gets
+end
+
+def initialize_deck
+  deck = {}
+  SUITS.each do |suit|
+           deck[suit] = CARDS.clone
+         end
+  deck
 end
 
 def create_hand!(deck)
@@ -275,7 +280,7 @@ loop do
   score = { player: 0, dealer: 0 }
 
   loop do
-    deck = deep_copy(DECK)
+    deck = initialize_deck
     player_hand = create_hand!(deck)
     dealer_hand = create_hand!(deck)
     dealer_total = total(dealer_hand)
