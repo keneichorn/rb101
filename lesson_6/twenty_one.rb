@@ -1,13 +1,9 @@
-require 'pry'
-TARGET_NUM = 150
+TARGET_NUM = 21
 DEALER_TARGET = TARGET_NUM - 4
 
 CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, :Jack, :Queen, :King, :Ace]
 
-SUITS = [:Hearts,
-        :Diamonds,
-        :Clubs,
-        :Spades]
+SUITS = [:Hearts, :Diamonds, :Clubs, :Spades]
 
 def add_space
   puts ''
@@ -27,27 +23,28 @@ def push_any_key
 end
 
 def welcome
-  puts "Welcome to Twenty-One".center(80)
-  add_space
-  puts "The goal of the game is to get as".center(80)
-  puts "close to the Twenty-One as possible.".center(80)
-  add_space
-  puts "The cards are worth face value,".center(80)
-  puts "Jack, Queen, and King are worth 10 each,".center(80)
-  puts "and Aces are worth either 1 or 11, whichever".center(80)
-  puts "helps you get the closest to the #{TARGET_NUM}.".center(80)
-  add_space
-  puts "The first person to get five wins is the champion.".center(80)
-  add_space
-  puts "Push any key to start".center(80)
+  puts '+----------------------------------------------------+'
+  puts '|              Welcome to Whatever-One               |'
+  puts '|                                                    |'
+  puts '|         The goal of the game is to get as          |'
+  puts "|            close to the #{TARGET_NUM} as possible.            |"
+  puts '|                                                    |'
+  puts '|          The cards are worth face value,           |'
+  puts '|      Jack, Queen, and King are worth 10 each,      |'
+  puts '|    and Aces are worth either 1 or 11, whichever    |'
+  puts "|        helps you get the closest to the #{TARGET_NUM}.        |"
+  puts '|                                                    |'
+  puts '| The first person to get five wins is the champion. |'
+  puts '|                Push any key to start               |'
+  puts '+----------------------------------------------------+'
   gets
 end
 
 def initialize_deck
   deck = {}
   SUITS.each do |suit|
-           deck[suit] = CARDS.clone
-         end
+    deck[suit] = CARDS.clone
+  end
   deck
 end
 
