@@ -1,13 +1,35 @@
-def joinor(array, delimiter=', ', conjuction='or')
-  case array.size
-  when 0..2 then array.join(" #{conjuction} ")
-  else
-    array[-1] = "#{conjuction} #{array.last}"
-    array.join(delimiter)
+require 'pry'
+CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, :jack, :queen, :king, :ace]
+
+DECK = {:hearts   => CARDS.clone,
+        :diamonds => CARDS.clone,
+        :clubs    => CARDS.clone,
+        :spades   => CARDS.clone}
+
+def create_hand!(deck)
+  hand = []
+  keys = []
+  2.times { |_| keys << deck.keys.sample}
+  
+  keys.each do |suit|
+    cards = deck[suit]
+    hand << [suit, cards.shuffle!.pop]
   end
+  binding.pry
+  hand
 end
 
-p joinor([1])                   # => "1 or 2"
-p  joinor([1, 2, 3])                # => "1, 2, or 3"
-p joinor([1, 2, 3], '; ')          # => "1; 2; or 3"
-p joinor([1, 3, 3], ', ', 'and')   # => "1, 2, and 3"
+def add_card(hand, deck)
+  suit = [deck.keys.sample]
+  suit.each do |suit|
+    cards = deck[suit]
+    hand << [suit, cards.shuffle!.pop]
+  end
+  hand
+end
+
+
+deck = DECK.clone
+hand = create_hand!(deck)
+
+# hand = [[:hearts, :Ace], [:hearts, :Queen]]

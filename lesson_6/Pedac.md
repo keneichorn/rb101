@@ -1,40 +1,57 @@
 =begin
+
+**Full Program**
+1. Initialize deck
+2. Deal cards to player and dealer
+3. Player turn: hit or stay
+   - repeat until bust or 'stay'
+4. If player bust, dealer wins.
+5. Dealer turn: hit or stay
+   - repeat until total >= 17
+6. If dealer bust, player wins.
+7. Compare cards and declare winner.
+
+
 PEDAC Template
 ==================================================================================================================================================================================================================================================================================================================================================================================================================
 
+***Current Problem***
+
+dealer turn
+
 **(Understand the) Problem**
 
--  Inputs: string
--  Output: hash
+-  Inputs: integer
+-  Output: 
 **Problem Domain:**
 ---
 
 **Implicit Requirements:**
-write a method that takes a string, and returns a hash that contains 3 entries: 
-one % of characters that are lowercase
-one % of characters that are uppercase
-one % of characters that are neither
-1. 
-2.
-3.
+
+
 
 **Mental Model:**
 
 
 **Data Structure**
 
+
+
 ---
 **Algorithm**
 
-split the string into an array of characters
-save the total size of the string into a variable
-
-iterate over the array putting all the lowercase chars into a new array
-iterate over the array putting all the uppercase chars into a new array
 
 
+**Left off at**
+I'm now working on the overall scoring system of the game.
+I have a untested unelegant solution atm.
+should be refactored and made nicer.
 
 
+
+I have created the dealer and player hands
+I have created the ace value totaler
+and the player turn loop
 
 ----
 =end
