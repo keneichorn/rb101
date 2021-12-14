@@ -1,8 +1,8 @@
 TARGET_NUM = 21
 DEALER_TARGET = TARGET_NUM - 4
-
+YES_OR_NO = ['y', 'n', 'yes', 'no']
+HIT_OR_STAY = ['h', 's', 'hit', 'stay']
 CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, :Jack, :Queen, :King, :Ace]
-
 SUITS = [:Hearts, :Diamonds, :Clubs, :Spades]
 
 def add_space
@@ -71,8 +71,7 @@ end
 
 def total(cards)
   values = cards.map { |card| card[1] }
-  score = values.map { |card| card_value(card) }
-  total = score.sum
+  total = values.map { |card| card_value(card) }.sum
 
   values.select { |value| value == :Ace }.count.times do
     total -= 10 if total > TARGET_NUM
@@ -81,14 +80,14 @@ def total(cards)
   total
 end
 
-def card_value(cards)
-  case cards
+def card_value(card)
+  case card
   when :Ace    then 11
   when :King   then 10
   when :Queen  then 10
   when :Jack   then 10
   else
-    cards
+    card
   end
 end
 
@@ -143,9 +142,10 @@ end
 def hit_or_stay
   answer = ''
   loop do
-    prompt "Would you like to hit or stay? (h) for hit (s) for stay"
+    prompt 'Would you like to hit or stay?'
+    prompt '(h) for hit (s) for stay'
     answer = gets.chomp.downcase
-    break if ['h', 's'].include?(answer)
+    break if HIT_OR_STAY.include?(answer)
     prompt "You must enter (h) or (s)!"
   end
   answer
@@ -167,8 +167,8 @@ end
 def player_stays(player_hand, dealer_hand, player_total, dealer_total, deck)
   loop do
     break if busted?(player_total)
-    system_clear
-    prompt "You have chosen to stay, with the total of #{player_total}"
+    add_space
+    prompt "You have chosen to stay."
     add_space
     push_any_key
     dealer_total = dealer_turn(player_total,
@@ -189,6 +189,7 @@ def dealer_turn(player_total, dealer_total, player_hand, dealer_hand, deck)
       prompt "The dealer busted"
     elsif dealer_total <= DEALER_TARGET
       prompt "The dealer hits!"
+      add_space
       add_card!(dealer_hand, deck)
       dealer_total = total(dealer_hand)
     end
@@ -265,8 +266,8 @@ def play_again
   prompt "Press (y) for yes, or (n) for no."
   loop do
     choice = gets.chomp.downcase
-    break if ['y', 'n'].include?(choice)
-    prompt "Please enter (y) or (n)."
+    break if YES_OR_NO.include?(choice)
+    prompt "Please enter (y) for yes or (n) for no."
   end
   choice
 end
