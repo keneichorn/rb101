@@ -4,6 +4,7 @@ YES_OR_NO = ['y', 'n', 'yes', 'no']
 HIT_OR_STAY = ['h', 's', 'hit', 'stay']
 CARDS = [2, 3, 4, 5, 6, 7, 8, 9, 10, :Jack, :Queen, :King, :Ace]
 SUITS = [:Hearts, :Diamonds, :Clubs, :Spades]
+WINNING_SCORE = 5
 
 def add_space
   puts ''
@@ -17,8 +18,8 @@ def prompt(string)
   puts "=> #{string}"
 end
 
-def push_any_key
-  prompt 'Push any key to continue...'
+def push_enter
+  prompt 'Push enter to continue...'
   gets
 end
 
@@ -35,7 +36,7 @@ def welcome
   puts "|        helps you get the closest to the #{TARGET_NUM}.        |"
   puts '|                                                    |'
   puts '| The first person to get five wins is the champion. |'
-  puts '|                Push any key to start               |'
+  puts '|                 Push enter to start                |'
   puts '+----------------------------------------------------+'
   gets
 end
@@ -170,7 +171,7 @@ def player_stays(player_hand, dealer_hand, player_total, dealer_total, deck)
     add_space
     prompt "You have chosen to stay."
     add_space
-    push_any_key
+    push_enter
     dealer_total = dealer_turn(player_total,
                                dealer_total,
                                player_hand,
@@ -193,7 +194,7 @@ def dealer_turn(player_total, dealer_total, player_hand, dealer_hand, deck)
       add_card!(dealer_hand, deck)
       dealer_total = total(dealer_hand)
     end
-    push_any_key
+    push_enter
     break if dealer_total > DEALER_TARGET || busted?(dealer_total)
   end
   dealer_total
@@ -237,26 +238,22 @@ def display_score(score)
   prompt "    The score is"
   prompt "Player: #{score[:player]} vs Dealer: #{score[:dealer]}"
   add_space
-  push_any_key
+  push_enter
 end
 
 def champion?(score)
-  if score[:player] == 5 || score[:dealer] == 5
-    true
-  else
-    false
-  end
+  score[:player] == WINNING_SCORE || score[:dealer] == WINNING_SCORE
 end
 
 def display_champion(score)
   system_clear
-  if score[:player] == 5
+  if score[:player] == WINNING_SCORE
     prompt 'You have beaten the dealer, and are the Champion!!'
   else
     prompt 'The Dealer has beaten you, and is the Champion!'
   end
   add_space
-  push_any_key
+  push_enter
 end
 
 def play_again
