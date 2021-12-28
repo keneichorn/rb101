@@ -1,3 +1,4 @@
+require 'pry'
 TARGET_NUM = 21
 DEALER_TARGET = TARGET_NUM - 4
 YES_OR_NO = ['y', 'n', 'yes', 'no']
@@ -56,7 +57,7 @@ def create_hand!(deck)
 
   keys.each do |suit|
     cards = deck[suit]
-    hand << [suit, cards.shuffle!.pop]
+    hand << { suit: suit, value: cards.shuffle!.pop }
   end
   hand
 end
@@ -67,11 +68,11 @@ def hand_formatting(hand)
 end
 
 def card_formatting(card)
-  "#{card[1]} of #{card[0]}"
+  "#{card[:value]} of #{card[:suit]}"
 end
 
 def total(cards)
-  values = cards.map { |card| card[1] }
+  values = cards.map { |card| card[:value] }
   total = values.map { |card| card_value(card) }.sum
 
   values.select { |value| value == :Ace }.count.times do
@@ -97,7 +98,7 @@ def add_card!(hand, deck)
   suit = [deck.keys.sample]
   suit.each do |card|
     cards = deck[card]
-    hand << [suit[0], cards.shuffle!.pop]
+    hand << { suit: suit[0], value: cards.shuffle!.pop }
   end
   hand
 end
